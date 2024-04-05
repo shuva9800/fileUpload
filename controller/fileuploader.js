@@ -30,8 +30,9 @@ function matchType(supportedType, fileType){
 }
 //upload file to cloudinary 
 async function uploadFiletoCloudinary(file, folder){
+    console.log("inside clouidnary")
     const option = {folder};
-    return await cloudinary.uploader.upload(file.tempFilepath, option)
+    return await cloudinary.uploader.upload(file.tempFilePath, option)
 }
 // image upload handler
 exports.imageUpload = async (req, res)=> {
@@ -44,19 +45,29 @@ exports.imageUpload = async (req, res)=> {
          const supportedType =["jpg", "png", "jpeg"];
          const fileType = file.name.split(".")[1].toLowerCase();
          console.log("filetype:-", fileType);
-        //  const value = matchType( supportedType,fileType);
+        const value = matchType( supportedType,fileType);
         
-         if(! matchType(supportedType,fileType)){
+         if(! value){
             return res.status(404).json({
                 success:false,
                 message:" file type not supported"
             })
          }
-
-         const response = await uploadFiletoCloudinary(file, "shuvadata")
+      //console.log("type matched");
+         const response = await uploadFiletoCloudinary(file, "shuvadata");
+         console.log("response is:-", response)
+         return res.status(200).json({
+            success:true,
+            response,
+            message: "image upload successfully"
+         })
          
     }
     catch(error){
-
+        console.log(error);
+        return res.status(404).json({
+            success:false,
+            message: "somthing went wrong"
+        })
     }
 }
