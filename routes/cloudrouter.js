@@ -6,8 +6,8 @@ const{imageUpload, videoUpload, imagecompressUpload, fileUpload}= require("../co
 
 route.post("/fileupload",fileUpload);
 route.post("/imageupload", imageUpload);
-// route.post("/videoupload", videoUpload);
-// route.post("/compressimg", imagecompressUpload);
+ route.post("/videoupload", videoUpload);
+route.post("/compressimg", imagecompressUpload);
 
 
 module.exports= route;
