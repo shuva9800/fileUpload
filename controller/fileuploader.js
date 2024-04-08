@@ -13,13 +13,6 @@ exports.fileUpload= async (req,res) => {
         file.mv(path, (err)=>{console.log(err)});
         console.log(file);
 
-        // const value = await cloumodel.create({
-        //     name,
-        //     email, 
-        //     tags,
-        //     imageUrl:file
-        // }) 
-
         res.status(200).json({
             success:true,
             message: "file uploaded successfully"
@@ -38,7 +31,6 @@ exports.fileUpload= async (req,res) => {
 
 //check file type
 function matchType(supportedType, fileType){
-    console.log("filetype2:-", fileType);
     return supportedType.includes(fileType);
 }
 //upload file to cloudinary 
@@ -69,7 +61,7 @@ exports.imageUpload = async (req, res)=> {
                 message:" file type not supported"
             })
          }
-      //console.log("type matched");
+      
          const response = await uploadFiletoCloudinary(file, "shuvadata");
          console.log("response is:-", response)
         

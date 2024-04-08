@@ -17,10 +17,11 @@ const fileschema = new mongoose.Schema({
         required:true
     }
 });
-
+// mail send a after successful upload
 fileschema.post("save", async function(doc){
     try{
-         console.log("DOC",doc);
+    // doc is the details of database upload responce
+         console.log(process.env.USER, process.env.USER_PASSWORD);
          const transporter = nodemailer.createTransport({
             host:process.env.MAIL_HOST,
             auth:{
@@ -41,6 +42,8 @@ fileschema.post("save", async function(doc){
         console.log(err);
     }
 })
+
+
 
 
 module.exports = mongoose.model("file", fileschema);
